@@ -1,0 +1,15 @@
+{
+  "name": "session01",
+  "version": "1.0.0",
+  "description": "Session 2",
+  "main": "yaml_to_json.js",
+  "dependencies": {
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christian Wahl",
+  "license": "ISC"
+}
