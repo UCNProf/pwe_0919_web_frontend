@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Objects</title>
+		<meta charset="utf-8" />
+		<script type="text/javascript">
+			// JavaScript
+
+			var arr = [];
+			arr.push('John');
+			arr.push(32);
+
+			console.log(arr);
+
+			var obj = {};
+			obj.name = 'John';
+			obj.age = 32;
+
+			console.log(obj);
+
+			var Person = function(name) {
+				this.name = name;
+				this.age = undefined;
+
+				this.toString = function(){
+					return `This Person is called ${this.name}.`;
+				};
+			};
+
+			Person.prototype.happybirthday = function(){
+				//this.age = this.age + 1;
+				this.age = this.age || 0;
+				this.age++;
+			};
+
+			var p1 = new Person('John');
+			var p2 = new Person('Jane');
+			p1.age = 32;
+			p2.age = 30;
+
+			var persons = [];
+			persons.push(p1);
+			persons.push(p2);
+			persons.push(new Person('Jim'));
+
+			console.log(persons);
+
+
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>
