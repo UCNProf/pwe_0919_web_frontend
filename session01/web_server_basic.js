@@ -9,9 +9,10 @@ let server = createServer((request, response) => {
 
 	fs.readFile(file, 'utf-8', (err, data) => {
 	if (err) throw err;
-		console.log(data);
-		response.write(data);
-		response.end();
+	
+	console.log(data);
+	response.write(data);
+	response.end();
 	});
 	//response.write(`<h1>Hello!</h1><p>You asked for <code>${request.url}</code></p>`);
 });
