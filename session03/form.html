@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Form page</title>
+	</head>
+	<body>
+		<h1>Form page</h1>
+		<form name="textform" method="post">
+			<input type="text" name="text" />
+			<input type="text" name="text2" />
+			<button>Submit</button>
+		</form>
+		<p>Posted text: ${(data.text) ? data.text : ''}</p>
+	</body>
+</html>
