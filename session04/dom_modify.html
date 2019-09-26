@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Modify the DOM</title>
+		<meta charset="utf-8" />
+		<script>
+			document.addEventListener('DOMContentLoaded', e => {
+				document.querySelector('#div1').innerHTML = '<span class="button">Div 1!</span>';
+				//document.querySelector('#div2').innerText = '<span>Div 1!</span>';
+
+				var span = document.createElement('span');
+				span.classList.add('button');
+				span.id = 'span1';
+				span.setAttribute('data-type', 'text');
+				var spantext = document.createTextNode('Span 1');
+				span.appendChild(spantext);
+
+				document.querySelector('#div2').appendChild(span);
+
+				var span2 = document.createElement('span');
+				var spantext2 = document.createTextNode('Span 2');
+				span2.appendChild(spantext2);
+
+				document.querySelector('#div2').insertBefore(span2, span);
+
+				var str = 'World!';
+				document.querySelector('#div3').innerHTML = `Hello ${str}`;
+
+				//document.querySelector('#div3').outerHTML = '<p>Par 1</p>';
+				//document.querySelector('#div3').outerHTML = '';
+				document.querySelector('#div3').outerHTML += '<p>Par2</p>';
+
+				var listElm = document.querySelector('#list');
+				var list = ['Item 1', 'Item 2', 'Item 3'];
+
+				var listStr = '';
+				list.forEach(item => {
+					var li = document.createElement('li');
+					li.innerText = item;
+					listElm.appendChild(li);
+					listStr += li.outerHTML;
+				});
+				listElm.innerHTML += listStr;
+				console.log(listStr);
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Modify the DOM</h1>
+		<div id="div1"></div>
+		<div id="div2"></div>
+		<div id="div3"></div>
+		<ul id="list"></ul>
+	</body>
+</html>

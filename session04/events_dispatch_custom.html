@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Custom events</title>
+		<meta charset="utf-8" />
+		<script>
+			var listElm, listArr = [];
+
+			var createNewItemElm = e => {
+				var li = document.createElement('li');
+				li.innerText = e.detail;
+				listElm.appendChild(li);
+			};
+
+			var createNewItemObj = e => {
+				var obj = {'title': e.detail};
+				listArr.push(obj);
+			};
+
+			var submitNewItem = e => {
+				e.preventDefault();
+				console.log(e.target.title.value);
+
+				var event = new CustomEvent('newItem', {
+					detail: e.target.title.value 
+				});
+				//console.log(event);
+				document.dispatchEvent(event);
+			};
+
+			document.addEventListener('DOMContentLoaded', e => {
+				listElm = document.querySelector('#list');
+
+				document.forms.newItem.addEventListener('submit', submitNewItem);
+
+				document.addEventListener('newItem', createNewItemElm);
+				document.addEventListener('newItem', createNewItemObj);
+
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Custom Event</h1>
+		<form name="newItem">
+			<input type="text" name="title" />
+			<button>New Item</button>
+		</form>
+		<ul id="list"></ul>
+	</body>
+</html>
