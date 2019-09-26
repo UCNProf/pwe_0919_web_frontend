@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>localstorage</title>
+		<meta charset="utf-8" />
+		<script>
+			document.addEventListener('DOMContentLoaded', e => {
+
+				if(localStorage.text) {
+					document.querySelector('textarea').value = localStorage.text;
+				} else {
+					localStorage.text = '';
+				}
+
+				document.querySelector('textarea').addEventListener('keyup', e => {
+					localStorage.text = e.target.value;
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form>
+			<textarea name="text"></textarea>
+		</form>
+	</body>
+</html>
