@@ -3,5 +3,17 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    -var menu = {'home': '/', 'users': '/users', 'about': '/about'};
   body
-    block content
+    nav
+      ul
+        each val, key in menu
+          li
+            if id == key
+              a.current(href=val)= key
+            else
+              a(href=val)= key
+
+
+    main
+      block content
