@@ -6,6 +6,13 @@ var logger = require('morgan');
 
 var session = require('express-session');
 
+// MySql
+var mysql = require('mysql');
+var db = require('./db');
+db.connection(function(){
+  console.log('DB connection done!');
+});
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -26,8 +33,17 @@ app.use(session({
 	secret: 'secret'
 }));
 
+function restrict(req, res, next) {
+  // body...
+  if (req.session.username) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', restrict, usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
