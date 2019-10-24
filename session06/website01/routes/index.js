@@ -15,8 +15,11 @@ router.post('/login', function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
   db.get().query('SELECT * FROM users WHERE name = ? AND password = ?', [username, password], function (error, results, fields) {
+		if (error) throw error;
 		console.log(results);
-  		req.session.username = username;
+		if(results.length == 1){
+  			req.session.username = username;
+		}
 		res.redirect('/');
 	});
 });
