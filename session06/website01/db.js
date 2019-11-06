@@ -8,8 +8,8 @@ exports.connection = function(done) {
 	if (state.db) return done();
 	state.db = mysql.createConnection({
 		host: 'localhost',
-		user: 'notes',
-		password: '4x9airnnnBvjrjm0',
+		user: 'website01',
+		password: 'ZcS@D4f#8nDt@u',
 		database: 'website01'
 	});
 	done();
