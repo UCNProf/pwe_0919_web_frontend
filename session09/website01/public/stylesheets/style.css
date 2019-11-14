@@ -1,6 +1,12 @@
+html, body {
+	margin: 0;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
 }
 
 a {
@@ -28,4 +34,26 @@ nav a {
 	padding: .5em;
 	text-decoration: none;
 	color: #fff;
+}
+
+main {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
+}
+
+div#statusmessage {
+	opacity: 0;
+	transition: opacity 1s;
+	transition-timing-function: ease-in-out;
+	position: absolute;
+	background-color: yellow;
+	left: calc(50% - 50px);
+	padding: .5em;
+	width: 100px;
+	text-align: center;
+}
+
+div#statusmessage.highlight {
+	opacity: 1;
 }

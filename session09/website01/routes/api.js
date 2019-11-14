@@ -17,7 +17,7 @@ router.get('/users/:userid', function(req, res, next) {
 	});
 });
 
-
+/* get all notes for a user */
 router.get('/notes', function(req, res, next) {
 	var userid = req.session.user.id;
 	db.get().query('SELECT id, uuid, date, title FROM notes WHERE user_id = ?', [userid], function (error, results, fields) {
@@ -66,7 +66,7 @@ router.put('/notes/:uuid', function(req, res, next) {
 		// get note just created
 		db.get().query('SELECT id, uuid, date, title, content FROM notes WHERE user_id = ? AND uuid = ?', [userid,uuid], function (error, results, fields) {
 			let obj = {};
-			obj.status = 'INSERT';
+			obj.status = 'UPDATE';
 			obj.note = results[0];
 			res.json(obj);
 		});
