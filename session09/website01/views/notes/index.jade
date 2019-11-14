@@ -1,0 +1,14 @@
+extends ../layout
+
+block head
+  script(src='/javascripts/notes.js')
+
+block content
+  h1= title
+  p List of notes
+  ul(id="notes")
+    each note in notes
+      li
+        a(href=note.uuid)= note.title
+  button(id="newnote")= "New note"
+  div(id="notecontent")
