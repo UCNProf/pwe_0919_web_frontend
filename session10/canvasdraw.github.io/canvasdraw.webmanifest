@@ -1,0 +1,11 @@
+{
+	"icons":[
+		{"src": "page.png", "sizes": "48x48"}
+	],
+	"name" : "Canvas Draw",
+	"short_name" : "Draw",
+	"display" : "standalone",
+	"background_color" : "orange",
+	"start_url" : "/",
+	"scope" : "/"
+}

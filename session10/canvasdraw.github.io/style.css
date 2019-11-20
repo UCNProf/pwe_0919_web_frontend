@@ -1,0 +1,40 @@
+html, body {
+	margin: 0;
+}
+
+body {
+	overflow: hidden;
+}
+
+nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: row;
+}
+
+nav button, nav input {
+	height: 2em;
+	width: 5em;
+}
+
+#canvas {
+	position: relative;
+}
+
+@media (orientation: landscape) {
+  body {
+  }
+  nav {
+  	flex-direction: column;
+  }
+}
+
+@media (orientation: portrait) {
+  body {
+  }
+  nav {
+  	flex-direction: row;
+  }
+}
