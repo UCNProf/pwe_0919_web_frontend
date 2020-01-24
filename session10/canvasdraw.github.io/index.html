@@ -7,17 +7,18 @@
 		<title>Canvas Draw</title>
 		<link rel="stylesheet" type="text/css" href="/style.css">
 		<script>    
-			var canvas, ctx, ball, btnclear, inputcolor;
+			var canvas, ctx, ball, btnclear, inputcolor, inputsize;
+			var mouse = {down:false};
 			
-			var Ball = function(color){
-				this.lineWidth = 5;
+			var Ball = function(color, size){
+				this.size = 5;
 				this.color = color;
 				this.left;
 				this.top;
 			};
 
 			Ball.prototype.render = function(){
-				ctx.lineWidth = this.lineWidth;
+				ctx.lineWidth = this.size;
 				ctx.strokeStyle = this.color;
 				ctx.lineCap = 'round';
 				ctx.lineTo(this.left, this.top);
@@ -38,17 +39,18 @@
 			}, false);
 
 			var setSize = elm => {
-				elm.width = window.outerWidth;
-				elm.height = window.outerHeight;
+				elm.width = window.innerWidth;
+				elm.height = window.innerHeight;
 			};
 			
-			var load = function(){
+			var load = e => {
 				canvas = document.getElementById('canvas');
 				btnclear = document.getElementById('btnclear');
 				inputcolor = document.getElementById('inputcolor');
+				inputsize = document.getElementById('inputsize');
 
 				setSize(canvas);
-				ball = new Ball(inputcolor.value);
+				ball = new Ball(inputcolor.value, inputsize.value);
 				if (canvas.getContext) {  
 					ctx = canvas.getContext('2d');
 					ctx.save();
@@ -69,14 +71,27 @@
 
 					canvas.addEventListener('touchmove', ontouchmove);
 
-					canvas.addEventListener('touchstart', function(e) {
+					canvas.addEventListener('touchstart', e => {
 						ctx.beginPath();
 					});
 
-					canvas.addEventListener('touchend', function(e) {
+					canvas.addEventListener('touchend', e => {
 						localStorage.setItem('img', canvas.toDataURL());
 						ctx.restore();
 					});
+
+					canvas.addEventListener('mousemove', mousemove, false);
+
+					canvas.addEventListener('mousedown', e => {
+						ctx.beginPath();
+						mouse.down = true;
+					}, false);
+
+					canvas.addEventListener('mouseup', e => {
+						localStorage.setItem('img', canvas.toDataURL());
+						ctx.restore();
+						mouse.down = false;
+					}, false);
 				}
 
 				document.getElementById('btnclear').addEventListener('click', e => {
@@ -87,13 +102,27 @@
 				document.getElementById('inputcolor').addEventListener('change', e => {
 					ball.color = e.target.value;
 				});
+
+				document.getElementById('inputsize').addEventListener('change', e => {
+					ball.size = e.target.value;
+				});
 			};
 			
-			var ontouchmove = function(e){
+			var ontouchmove = e => {
 				touch = e.touches[0];
-				ball.left = touch.pageX;
-				ball.top = touch.pageY;
+				ball.left = touch.pageX-canvas.offsetLeft;
+				ball.top = touch.pageY-canvas.offsetTop;
 				ball.render();
+			};
+
+			var mousemove = e => {
+				mouse.left = e.clientX-canvas.offsetLeft;
+				mouse.top = e.clientY-canvas.offsetTop;
+				if(mouse.down){
+					ball.left = mouse.left;
+					ball.top = mouse.top;
+					ball.render();
+				}
 			};
 
 			var loadServiceWorker = e => {
@@ -123,6 +152,7 @@
 		<nav>
 			<button id="btnclear">Clear</button>
 			<input type="color" name="color" id="inputcolor" />
+			<input type="range" name="size" id="inputsize" min="2" max="20" />
 		</nav>
 	</body>
 </html>
